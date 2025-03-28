@@ -2,7 +2,7 @@ import solid from 'vite-plugin-solid';
 import path from 'path';
 import packageJson from './package.json';
 import dts from 'vite-plugin-dts';
-import {defineConfig} from "vite";
+import { defineConfig } from 'vite';
 
 export default defineConfig({
   plugins: [
@@ -17,11 +17,10 @@ export default defineConfig({
   },
   build: {
     minify: true,
-    sourcemap: true,
     lib: {
       entry: path.resolve(__dirname, packageJson.main),
       name: packageJson.name,
-      formats: ['es', 'umd'],
+      formats: ['es'],
     },
     outDir: 'build',
     emptyOutDir: true,

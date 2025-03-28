@@ -4,19 +4,16 @@
   "version": "1.0.0",
   "access": "public",
   "description": "A collection of decorators to make your classes reactive, using SolidJS",
-  "main": "src/main.ts",
-  "exports": {
-    ".": {
-      "types": "./build/main.d.ts",
-      "require": "./build/solid-reactivity-decorators.umd.js",
-      "import": "./build/solid-reactivity-decorators.mjs"
-    }
-  },
+  "main": "build/solid-reactivity-decorators.mjs",
   "module": "build/solid-reactivity-decorators.mjs",
   "types": "build/main.d.ts",
-  "files": [
-    "build"
-  ],
+  "exports": {
+    ".": {
+      "import": "./build/solid-reactivity-decorators.mjs",
+      "types": "./build/main.d.ts"
+    }
+  },
+  "files": ["build", "package.json", "README.md"],
   "keywords": [
     "solid",
     "solidjs",
@@ -30,7 +27,6 @@
     "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx}\"",
     "lint": "eslint src --ext .ts,.tsx",
     "lint:fix": "eslint src --ext .ts,.tsx --fix",
-    "test": "vitest",
     "tsc": "tsc --noEmit"
   },
   "devDependencies": {
