@@ -9,9 +9,9 @@ A collection of decorators to make your classes reactive, using SolidJS.
 
 ## Installation
 
-NOTE: solid-js@1.x and @solid/primitives@1.x are peer dependencies.
+NOTE: solid-js@1.x and @solid-primitives/memo@1.x are peer dependencies.
 ```bash
-npm install solid-reactivity-decorators solid-js
+npm install solid-reactivity-decorators solid-js @solid-primitives/memo
 ```
 
 ## Usage
