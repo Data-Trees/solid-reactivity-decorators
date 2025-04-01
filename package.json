@@ -1,6 +1,6 @@
 {
-  "name": "@spacio/solid-reactivity-decorators",
-  "author": "Spacio",
+  "name": "@datatrees/solid-reactivity-decorators",
+  "author": "dataTrees",
   "version": "1.0.0",
   "access": "public",
   "description": "A collection of decorators to make your classes reactive, using SolidJS",
@@ -13,7 +13,11 @@
       "types": "./build/main.d.ts"
     }
   },
-  "files": ["build", "package.json", "README.md"],
+  "files": [
+    "build",
+    "package.json",
+    "README.md"
+  ],
   "keywords": [
     "solid",
     "solidjs",
@@ -27,7 +31,8 @@
     "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx}\"",
     "lint": "eslint src --ext .ts,.tsx",
     "lint:fix": "eslint src --ext .ts,.tsx --fix",
-    "tsc": "tsc --noEmit"
+    "tsc": "tsc --noEmit",
+    "test": "vitest run"
   },
   "devDependencies": {
     "@eslint/js": "^9.23.0",
@@ -46,10 +51,10 @@
     "solid-js": "^1.9.5",
     "typescript": "^5.8.2",
     "typescript-eslint": "^8.28.0",
-    "vitest": "^3.0.9",
-    "vite": "^6.2.3",
+    "vite": "^6.2.4",
     "vite-plugin-dts": "^4.5.3",
-    "vite-plugin-solid": "^2.11.6"
+    "vite-plugin-solid": "^2.11.6",
+    "vitest": "^3.0.9"
   },
   "peerDependencies": {
     "@solid-primitives/memo": "1.x",
