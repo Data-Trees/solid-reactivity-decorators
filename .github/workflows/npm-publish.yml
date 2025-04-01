@@ -43,7 +43,7 @@ jobs:
     needs: [test, check-version-change]
     if: github.event_name == 'release' || needs.check-version-change.outputs.should_run == 'true'
     env:
-      NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+      NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
