@@ -21,7 +21,7 @@ import { createSignal } from 'solid-js';
 import { reactive, effect, memo, getter } from 'solid-reactivity-decorators';
 
 @reactive
-class MyClass implements Reactive {
+class MyClass implements IReactive {
   declare destroy: () => void;
   nameSignal = createSignal('Dan');
   
