@@ -1,7 +1,7 @@
 {
   "name": "@data-trees/solid-reactivity-decorators",
   "author": "dataTrees",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "access": "public",
   "description": "A collection of decorators to make your classes reactive, using SolidJS",
   "main": "src/main.ts",

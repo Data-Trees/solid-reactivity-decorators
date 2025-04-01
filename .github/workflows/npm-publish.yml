@@ -51,4 +51,4 @@ jobs:
           node-version: 22
       - run: npm ci
       - run: npm run build
-      - run: npm publish
+      - run: npm publish --access public
