@@ -18,7 +18,7 @@ export default defineConfig({
   build: {
     minify: true,
     lib: {
-      entry: path.resolve(__dirname, packageJson.main),
+      entry: path.resolve(__dirname, 'src/main.ts'),
       name: packageJson.name,
       formats: ['es'],
     },
