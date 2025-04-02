@@ -1,5 +1,4 @@
-import { createSignal } from 'solid-js';
-import { effect, getter, type IReactive, memo, reactive } from './main';
+import { effect, getter, type IReactive, memo, reactive, signal } from './main';
 
 const countWatch = vi.fn();
 const count2Watch = vi.fn();
@@ -12,22 +11,22 @@ const count4Watch = vi.fn();
 class Example implements IReactive {
   declare destroy: () => void;
 
-  protected countSignal = createSignal(0);
+  @signal count: number = 0;
 
   @memo()
   getCount() {
     count2Watch();
-    return this.countSignal[0]();
+    return this.count;
   }
 
   @getter()
   get count2() {
     count3Watch();
-    return this.countSignal[0]();
+    return this.count;
   }
 
   setCount(value: number) {
-    this.countSignal[1](value);
+    this.count = value;
   }
 
   @effect
@@ -48,19 +47,19 @@ class Example implements IReactive {
 class ExtendedExample extends Example {
   @memo()
   getCount2() {
-    return this.countSignal[0]();
+    return this.count;
   }
 
   @memo({ isLazy: true })
   getCount3() {
     count3Watch();
-    return this.countSignal[0]();
+    return this.count;
   }
 
   @getter({ isLazy: true })
   get count4() {
     count4Watch();
-    return this.countSignal[0]();
+    return this.count;
   }
 
   onDestroy() {
@@ -98,8 +97,7 @@ describe('decorators', () => {
     example.destroy();
 
     await Promise.resolve();
-    // @ts-expect-error - we're testing the internals of the signal
-    expect(example.countSignal[0]()).toBe(5);
+    expect(example.count).toBe(5);
     expect(example.getCount()).toBe(5);
     expect(example.count2).toBe(5);
     expect(destroyWatch).toHaveBeenCalledTimes(1);

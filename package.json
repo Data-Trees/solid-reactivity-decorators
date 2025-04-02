@@ -61,7 +61,10 @@
     "solid-js": "1.x"
   },
   "repository": {
-      "type": "git",
-      "url": "https://github.com/Data-Trees/solid-reactivity-decorators.git"
+    "type": "git",
+    "url": "https://github.com/Data-Trees/solid-reactivity-decorators.git"
+  },
+  "dependencies": {
+    "reflect-metadata": "^0.2.2"
   }
 }

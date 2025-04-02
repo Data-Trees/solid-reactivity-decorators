@@ -23,7 +23,7 @@ import { reactive, effect, memo, getter } from 'solid-reactivity-decorators';
 @reactive
 class MyClass implements IReactive {
   declare destroy: () => void;
-  nameSignal = createSignal('Dan');
+  @signal nameSignal: string = 'Dan';
   
   @effect
   doStuff() {
@@ -85,3 +85,6 @@ This decorator is required on a class that uses the other decorators.
 
 ### `@getter({ isLazy?: boolean = false } = { isLazy: false })`
 * Same as `memo` but used for getters
+
+### `@signal`
+* Creates a signal property that can be listened to

@@ -1,14 +1,17 @@
-import { createEffect, createMemo, createRoot } from 'solid-js';
+import 'reflect-metadata';
+import { createEffect, createMemo, createRoot, createSignal } from 'solid-js';
 import { createLazyMemo } from '@solid-primitives/memo';
 
 export const DISPOSE = '__dispose__';
 export const EFFECTS_MAP = '__effects_map__';
+export const SIGNAL_PROPERTIES_SET = '__signals_init__';
 export const EFFECT_METHODS = '__effect_methods__';
 
 export interface IReactive {
   [DISPOSE]?: () => void;
   [EFFECTS_MAP]?: Map<string, () => void>;
   [EFFECT_METHODS]?: Set<string>;
+  [SIGNAL_PROPERTIES_SET]?: Set<string>;
   destroy: () => void;
   onDestroy?: () => void;
 }
@@ -115,11 +118,31 @@ export function reactive<T extends Constructor>(Base: T & WithEffectMethods) {
   return class extends Base implements IReactive {
     declare [DISPOSE]?: () => void;
     declare [EFFECTS_MAP]?: Map<string, () => void>;
+    declare [SIGNAL_PROPERTIES_SET]?: Set<string>;
     declare destroy: () => void;
     declare onDestroy?: () => void;
 
     constructor(...args: any[]) {
       super(...args);
+
+      // Initialize signals first
+      this[SIGNAL_PROPERTIES_SET] =
+        this[SIGNAL_PROPERTIES_SET] || new Set<string>();
+
+      for (const signalItem of this[SIGNAL_PROPERTIES_SET]) {
+        const currentValue = Reflect.get(this, signalItem);
+        const signal = createSignal(currentValue);
+        Object.defineProperty(this, signalItem, {
+          get: function signalGetter(this: IReactive) {
+            return signal[0]();
+          },
+          set: function signalSetter(this: IReactive, newValue: any) {
+            return signal[1](newValue);
+          },
+          configurable: true,
+          enumerable: true,
+        });
+      }
 
       // Create root and store dispose function
       this[DISPOSE] = createRoot((dispose) => {
@@ -202,4 +225,16 @@ export function getter(options?: { isLazy: boolean }) {
 
     return descriptor;
   };
+}
+
+/* Adds the property to the list of signals that will be initialized when the class is created.
+   Meant to be used like this:
+   @signal name: string = 'Dan';
+ */
+export function signal(target: IReactive, propertyKey: string) {
+  if (!target[SIGNAL_PROPERTIES_SET]) {
+    target[SIGNAL_PROPERTIES_SET] = new Set<string>();
+  }
+
+  target[SIGNAL_PROPERTIES_SET]?.add(propertyKey);
 }
