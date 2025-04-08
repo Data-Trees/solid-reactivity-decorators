@@ -17,8 +17,7 @@ npm install solid-reactivity-decorators solid-js @solid-primitives/memo
 ## Usage
 
 ```ts
-import { createSignal } from 'solid-js';
-import { reactive, effect, memo, getter } from 'solid-reactivity-decorators';
+import { reactive, effect, memo, getter, signal } from 'solid-reactivity-decorators';
 
 @reactive
 class MyClass implements IReactive {
@@ -53,6 +52,8 @@ class MyClass implements IReactive {
   }
 }
 
+// NOTE: The logs might not work the same way in your application,
+// but the idea is the same
 const myClass = new MyClass();
 // getter is Dan
 // Doing stuff Dan
