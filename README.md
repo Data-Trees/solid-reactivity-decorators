@@ -17,7 +17,7 @@ npm install solid-reactivity-decorators solid-js @solid-primitives/memo
 ## Usage
 
 ```ts
-import { reactive, effect, memo, getter, signal } from 'solid-reactivity-decorators';
+import { reactive, effect, memo, getter, signal } from '@data-trees/solid-reactivity-decorators';
 
 @reactive
 class MyClass implements IReactive {
